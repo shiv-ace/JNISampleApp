@@ -1,17 +1,14 @@
 package com.codeshiv.jsonparser;
 
-import org.apache.http.HttpEntity;
-import org.apache.http.HttpResponse;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.params.BasicHttpParams;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
-import java.io.InputStream;
+import java.io.IOException;
 import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
 
 public class JsonUtil {
 
@@ -55,42 +52,53 @@ public class JsonUtil {
     };
 
     private void getJson(){
-        DefaultHttpClient httpclient = new DefaultHttpClient(new BasicHttpParams());
-        HttpPost httppost = new HttpPost(Url);
-        // Depends on your web service
-        httppost.setHeader("Content-type", "application/json");
-        InputStream inputStream = null;
-        try {
-            HttpResponse response = httpclient.execute(httppost);
-            HttpEntity entity = response.getEntity();
-
-            inputStream = entity.getContent();
-            // json is UTF-8 by default
-            BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream, "UTF-8"), 8);
-            StringBuilder sb = new StringBuilder();
-
+        URL url = null;
+        BufferedReader reader = null;
+        StringBuilder stringBuilder;
+        try
+        {
+            url = new URL(Url);
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+            // just want to do an HTTP GET here
+            connection.setRequestMethod("GET");
+            // give it 15 seconds to respond
+            connection.setReadTimeout(15*1000);
+            connection.connect();
+            // read the output from the server
+            reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+            stringBuilder = new StringBuilder();
             String line = null;
             while ((line = reader.readLine()) != null)
             {
-                sb.append(line + "\n");
+                stringBuilder.append(line + "\n");
             }
-            result = sb.toString();
-
-            System.out.println("JSON : "+result);
-        } catch (Exception e) {
-            // Oops
+            result = stringBuilder.toString();
+        }
+        catch (Exception e)
+        {
             e.printStackTrace();
         }
-        finally {
-            try{
-                if(inputStream != null)
-                    inputStream.close();
-            }catch(Exception squish){}
+        finally
+        {
+            // close the reader; this can throw an exception too, so
+            // wrap it in another try/catch block.
+            if (reader != null)
+            {
+                try
+                {
+                    reader.close();
+                }
+                catch (IOException ioe)
+                {
+                    ioe.printStackTrace();
+                }
+            }
         }
     }
 
     private void parseJson(){
         try {
+            System.out.println("JSON on the Http Server : "+result);
             jsonObject = new JSONObject(result);
             jsonArray = jsonObject.getJSONArray("accounts");
 
