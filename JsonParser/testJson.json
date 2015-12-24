@@ -12,53 +12,53 @@
         "sim-ring-enable": "xxxx5959728",
         "sim-ring-disable": "xxxx5959729",
         "call-forward-enable": "xxxx5959719",
-        "call-forward-busy": "xxxx5959720",
+        "call-forward-busy": "xxxx595972xxxxxxxx",
         "call-forward-disable": "xxxx5959721",
         "call-appearance-active": "xxxx5959724",
         "call-appearance-held": "xxxx5959717",
-	"station_security.enabled": "0"
+	"station_security.enabled": "xxxxxxxx"
       },
       "dialing-rules": {
-        "remove-area-code": "0",
-        "national-number-length": "10",
+        "remove-area-code": "xxxxxxxx",
+        "national-number-length": "1xxxxxxxx",
         "enabled": "1",
         "outside-line": "",
         "country": "1",
         "area": "613",
         "pbx-main-prefix": "",
         "long-distance": "1",
-        "international-call": "011",
+        "international-call": "xxxxxxxx11",
         "internal-extension-length": "7"
       },
       "userid": "",
       "signaling": {
-        "password": "12345",
+        "password": "xxxxxxxx",
         "username": "xxxxxxx",
         "domain": "domain.com",
         "protocol": "tls",
-        "port": "5061",
-        "refresh": "0",
-        "address": "xxx.xxx.xxx.120",
+        "port": "5xxxxxxxx61",
+        "refresh": "xxxxxxxx",
+        "address": "xxx.xxx.xxx.12xxxxxxxx",
         "enabled": "1"
       },
-      "ces": {
-        "password": "12345",
+      "abdcdd": {
+        "password": "xxxxxxxx",
         "username": "xxxxxxx",
         "use-ssl": "1",
-       "port": "7777",
+       "port": "xxxxxxxx",
         "address": "xxx.xxx.xxx.169",
         "enabled": "1"
       },
-      "messaging": {
-        "username" : "7001000@domain.com",
-        "password" : "12345",
+      "hgytkd": {
+        "username" : "xxxxxxxx@domain.com",
+        "password" : "xxxxxxxx",
         "refresh": "11",
-        "port": "8443",
+        "port": "xxxxxxxx",
         "address": "xxx.xxx.xxx.21",
         "allowed": "1",
         "enabled": "1"
       },
-      "conference": "8880001@domain.com",
+      "conference": "xxxxxxxx@domain.com",
 	  "emergency-numbers": [
         11,
         111,
