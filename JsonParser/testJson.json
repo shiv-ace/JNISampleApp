@@ -1,0 +1,79 @@
+{
+  "accounts": [
+    {
+      "telephony-settings": {
+        "exclusion": "xxxx5959716",
+        "drop-last-added-party": "xxxx5959723",
+        "transfer-on-hangup": "xxxx5959718",
+        "conference-on-answer": "xxxx5959722",
+        "send-all-calls-cancel": "xxxx5959727",
+        "send-all-calls-enable": "xxxx5959726",
+        "idle-appearance-select": "xxxx5959725",
+        "sim-ring-enable": "xxxx5959728",
+        "sim-ring-disable": "xxxx5959729",
+        "call-forward-enable": "xxxx5959719",
+        "call-forward-busy": "xxxx5959720",
+        "call-forward-disable": "xxxx5959721",
+        "call-appearance-active": "xxxx5959724",
+        "call-appearance-held": "xxxx5959717",
+	"station_security.enabled": "0"
+      },
+      "dialing-rules": {
+        "remove-area-code": "0",
+        "national-number-length": "10",
+        "enabled": "1",
+        "outside-line": "",
+        "country": "1",
+        "area": "613",
+        "pbx-main-prefix": "",
+        "long-distance": "1",
+        "international-call": "011",
+        "internal-extension-length": "7"
+      },
+      "userid": "",
+      "signaling": {
+        "password": "12345",
+        "username": "xxxxxxx",
+        "domain": "domain.com",
+        "protocol": "tls",
+        "port": "5061",
+        "refresh": "0",
+        "address": "xxx.xxx.xxx.120",
+        "enabled": "1"
+      },
+      "ces": {
+        "password": "12345",
+        "username": "xxxxxxx",
+        "use-ssl": "1",
+       "port": "7777",
+        "address": "xxx.xxx.xxx.169",
+        "enabled": "1"
+      },
+      "messaging": {
+        "username" : "7001000@domain.com",
+        "password" : "12345",
+        "refresh": "11",
+        "port": "8443",
+        "address": "xxx.xxx.xxx.21",
+        "allowed": "1",
+        "enabled": "1"
+      },
+      "conference": "8880001@domain.com",
+	  "emergency-numbers": [
+        11,
+        111,
+        211,
+        311,
+        411
+      ],
+      "support": {
+        "email": "xxxx@domain.com",
+        "log-verbosity": "1"
+      },
+      "analytics": {
+        "enabled": "1"
+      },
+      "policy": "enterprise"
+    }
+  ]
+}

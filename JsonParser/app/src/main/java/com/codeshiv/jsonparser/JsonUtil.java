@@ -5,6 +5,9 @@ import org.apache.http.HttpResponse;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.params.BasicHttpParams;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.InputStream;
@@ -16,6 +19,8 @@ public class JsonUtil {
     private String result = null;
     private String Url = null;
     private Thread httpThread;
+    private JSONObject jsonObject;
+    private JSONArray jsonArray;
 
     private JsonUtil(){
         // Designed to make sure that Singleton instance of the class persists in the application
@@ -42,6 +47,7 @@ public class JsonUtil {
         public void run() {
             try {
                 getJson();
+                parseJson();
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -80,6 +86,23 @@ public class JsonUtil {
                 if(inputStream != null)
                     inputStream.close();
             }catch(Exception squish){}
+        }
+    }
+
+    private void parseJson(){
+        try {
+            jsonObject = new JSONObject(result);
+            jsonArray = jsonObject.getJSONArray("accounts");
+
+            JSONObject jsonObject1 = jsonArray.getJSONObject(0);
+
+            JSONObject jsonObject2 = jsonObject1.getJSONObject("telephony-settings");
+
+            String exclusion = jsonObject2.getString("exclusion");
+
+            System.out.println("JSON : "+exclusion);
+        }catch (JSONException e) {
+            e.printStackTrace();
         }
     }
 }
