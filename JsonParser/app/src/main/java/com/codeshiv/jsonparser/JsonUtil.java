@@ -3,6 +3,8 @@ package com.codeshiv.jsonparser;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -18,6 +20,7 @@ public class JsonUtil {
     private Thread httpThread;
     private JSONObject jsonObject;
     private JSONArray jsonArray;
+    private final Logger logger = LoggerFactory.getLogger(JsonUtil.class);
 
     private JsonUtil(){
         // Designed to make sure that Singleton instance of the class persists in the application
@@ -76,6 +79,7 @@ public class JsonUtil {
         }
         catch (Exception e)
         {
+            logger.debug("Error : "+e.getLocalizedMessage());
             e.printStackTrace();
         }
         finally
