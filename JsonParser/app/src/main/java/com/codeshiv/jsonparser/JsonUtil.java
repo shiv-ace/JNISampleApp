@@ -1,5 +1,7 @@
 package com.codeshiv.jsonparser;
 
+import android.os.Message;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -20,6 +22,8 @@ public class JsonUtil {
     private Thread httpThread;
     private JSONObject jsonObject;
     private JSONArray jsonArray;
+    private JsonApplication jsonApplication;
+    private MainActivity mainActivity;
     private final Logger logger = LoggerFactory.getLogger(JsonUtil.class);
 
     private JsonUtil(){
@@ -34,6 +38,8 @@ public class JsonUtil {
     }
 
     public void setUrl(String url){
+        jsonApplication = JsonApplication.getJsonApplication();
+        mainActivity = MainActivity.getMainActivity();
         Url = url;
     }
 
@@ -76,11 +82,13 @@ public class JsonUtil {
                 stringBuilder.append(line + "\n");
             }
             result = stringBuilder.toString();
+            postToUI(result);
         }
         catch (Exception e)
         {
             logger.debug("Error : "+e.getLocalizedMessage());
             e.printStackTrace();
+            postToUI(e.getLocalizedMessage());
         }
         finally
         {
@@ -115,6 +123,15 @@ public class JsonUtil {
             System.out.println("JSON : "+exclusion);
         }catch (JSONException e) {
             e.printStackTrace();
+        }
+    }
+
+    private void postToUI(String text){
+        if(text != null){
+            mainActivity.setMessageOnUI(text);
+            Message message = Message.obtain();
+            message.obj = mainActivity.getMessageOnUI();
+            mainActivity.ServerResponse.sendMessage(message);
         }
     }
 }
