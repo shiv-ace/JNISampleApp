@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.text.method.ScrollingMovementMethod;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -25,6 +26,9 @@ public class MainActivity extends Activity implements View.OnClickListener{
         mainActivity = this;
         getJsonButton = (Button) findViewById(R.id.getJsonButton);
         getJsonButton.setOnClickListener(this);
+
+        ReceivedCode = (TextView) findViewById(R.id.jsonDisplay);
+        ReceivedCode.setMovementMethod(new ScrollingMovementMethod());
     }
 
     @Override
@@ -55,7 +59,6 @@ public class MainActivity extends Activity implements View.OnClickListener{
         ServerResponse = new Handler() {
             @Override
             public void handleMessage(Message msg) {
-                ReceivedCode = (TextView) findViewById(R.id.jsonDisplay);
                 ReceivedCode.setText(messageOnUI);
             }
         };
