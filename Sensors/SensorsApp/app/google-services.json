@@ -1,0 +1,56 @@
+{
+  "project_info": {
+    "project_id": "sensorsapp",
+    "project_number": "7234058800",
+    "name": "SensorsApp"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:7234058800:android:06fc399a49717a14",
+        "client_id": "android:com.codeshiv.sensorsfunc",
+        "client_type": 1,
+        "android_client_info": {
+          "package_name": "com.codeshiv.sensorsfunc",
+          "certificate_hash": []
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "7234058800-8mqev09lhqvp1g70d9gne82bbvn1ovpi.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.codeshiv.sensorsfunc",
+            "certificate_hash": "A28A9FF978EA3F01469686164C3DBDD8D51069E5"
+          }
+        },
+        {
+          "client_id": "7234058800-76va10pmf9mmm16l7hamhuarse85ghvq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "cloud_messaging_service": {
+          "status": 1,
+          "apns_config": []
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "google_signin_service": {
+          "status": 2
+        },
+        "ads_service": {
+          "status": 1
+        }
+      }
+    }
+  ],
+  "client_info": [],
+  "ARTIFACT_VERSION": "1"
+}

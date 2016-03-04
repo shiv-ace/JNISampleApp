@@ -9,6 +9,7 @@ public class MainActivity extends Activity{
     public TextView textView;
     private static MainActivity mainActivity = null;
     private Sensors sensors = null;
+    private LocationManagers locationManagers = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -17,8 +18,11 @@ public class MainActivity extends Activity{
         textView = (TextView)findViewById(R.id.text);
         mainActivity = this;
 
-        sensors = Sensors.getSensors();
-        sensors.initializeSensor(textView);
+//        sensors = Sensors.getSensors();
+//        sensors.initializeSensor(textView);
+
+        locationManagers = LocationManagers.getLocationManagers();
+        locationManagers.initializeComponents(textView);
     }
 
     public static MainActivity getMainActivity(){
