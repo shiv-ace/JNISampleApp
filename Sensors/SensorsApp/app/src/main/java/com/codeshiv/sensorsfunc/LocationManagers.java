@@ -26,8 +26,8 @@ public class LocationManagers implements GoogleApiClient.ConnectionCallbacks,
     private Location mLastLocation;
     private LocationRequest mLocationRequest;
     private static LocationManagers locationManagers = null;
-    List<Address> currentLocation = null;
-    String locality = null;
+    private List<Address> currentLocation = null;
+    private String locality = null;
 
     private LocationManagers(){
 
