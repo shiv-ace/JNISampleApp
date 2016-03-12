@@ -1,5 +1,7 @@
 package com.codeshiv.sensorsfunc;
 
+import android.location.Address;
+import android.location.Geocoder;
 import android.location.Location;
 import android.os.Bundle;
 import android.widget.TextView;
@@ -9,6 +11,10 @@ import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationListener;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
+
+import java.io.IOException;
+import java.util.List;
+import java.util.Locale;
 
 public class LocationManagers implements GoogleApiClient.ConnectionCallbacks,
         GoogleApiClient.OnConnectionFailedListener, LocationListener {
@@ -20,6 +26,8 @@ public class LocationManagers implements GoogleApiClient.ConnectionCallbacks,
     private Location mLastLocation;
     private LocationRequest mLocationRequest;
     private static LocationManagers locationManagers = null;
+    List<Address> currentLocation = null;
+    String locality = null;
 
     private LocationManagers(){
 
@@ -78,7 +86,24 @@ public class LocationManagers implements GoogleApiClient.ConnectionCallbacks,
 
         double latitude = location.getLatitude();
         double longitude = location.getLongitude();
-        this.textView.setText("Latitude = "+latitude +"\nLongitude = "+longitude);
+
+
+
+        Geocoder geocoder = new Geocoder(mainActivity.getApplicationContext(), Locale.getDefault());
+        try {
+            currentLocation = geocoder.getFromLocation(latitude, longitude, 10);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        for(Address address : currentLocation){
+            System.out.println(address.getAddressLine(0));
+            locality = address.getAddressLine(0)+"  "+address.getAddressLine(1);
+            break;
+        }
+        this.textView.setText("Latitude = " + latitude + "\nLongitude = " + longitude+"\n"+locality);
+
+        mainActivity.displayNotification(locality);
     }
 
     @Override
