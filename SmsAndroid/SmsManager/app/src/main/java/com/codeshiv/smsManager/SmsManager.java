@@ -1,82 +1,51 @@
 package com.codeshiv.smsManager;
 
-import android.content.ContentResolver;
-import android.database.Cursor;
-import android.net.Uri;
-import android.widget.TextView;
+import android.telephony.SmsManager;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 
-import java.util.ArrayList;
-import java.util.List;
+public class SMSManager implements View.OnClickListener{
 
-public class SmsManager {
-
-    private static SmsManager smsManager = null;
-    private TextView textView = null;
+    private static SMSManager sms = null;
+    private SmsManager smsManager = null;
     private MainActivity mainActivity = null;
-    private List<Sms> lstSms = new ArrayList<>();
-    private String messageOnUI = null;
+    private EditText editTextNumber = null;
+    private EditText editTextMessage = null;
+    private Button button = null;
 
-    private SmsManager(){
+    private SMSManager(){
 
     }
 
-    public static SmsManager getSmsManager(){
-        if(smsManager == null){
-            smsManager = new SmsManager();
+    public static SMSManager getSmsManager(){
+        if(sms == null){
+            sms = new SMSManager();
         }
-        return smsManager;
+        return sms;
     }
 
-    public void initializeComponents(MainActivity mainActivity, TextView textView){
+    public void initializeComponents(MainActivity mainActivity,EditText editTextNumber,EditText editTextMessage,Button button){
 
-        this.textView = textView;
         this.mainActivity = mainActivity;
+        this.editTextMessage = editTextMessage;
+        this.editTextNumber = editTextNumber;
+        this.button = button;
 
-        getSmsFromDevice();
+        button.setOnClickListener(this);
     }
 
-    private void getSmsFromDevice(){
-        Sms objSms;
-        Uri message = Uri.parse("content://sms/");
-        ContentResolver cr = mainActivity.getContentResolver();
+    @Override
+    public void onClick(View v) {
 
-        Cursor c = cr.query(message, null, null, null, null);
-        mainActivity.startManagingCursor(c);
-        assert c != null;
-        int totalSMS = c.getCount();
-
-        if (c.moveToFirst()) {
-            for (int i = 0; i < totalSMS; i++) {
-                objSms = new Sms();
-                objSms.setId(c.getString(c.getColumnIndexOrThrow("_id")));
-                objSms.setAddress(c.getString(c
-                        .getColumnIndexOrThrow("address")));
-                objSms.setMsg(c.getString(c.getColumnIndexOrThrow("body")));
-                objSms.setReadState(c.getString(c.getColumnIndex("read")));
-                objSms.setTime(c.getString(c.getColumnIndexOrThrow("date")));
-                if (c.getString(c.getColumnIndexOrThrow("type")).contains("1")) {
-                    objSms.setFolderName("inbox");
-                } else {
-                    objSms.setFolderName("sent");
-                }
-
-                lstSms.add(objSms);
-                c.moveToNext();
-            }
+        if(v.getId() == R.id.sendButton){
+            sendMessage(editTextNumber.getText().toString(),editTextMessage.getText().toString());
         }
-        c.close();
-
-        populateTextView();
     }
 
-    private void populateTextView(){
+    private void sendMessage(String number, String message){
 
-        messageOnUI = "";
-
-        for(Sms sms : lstSms){
-            messageOnUI = messageOnUI.concat(sms.getAddress()+"\n");
-        }
-
-        textView.setText(messageOnUI);
+        smsManager = SmsManager.getDefault();
+        smsManager.sendTextMessage(number,null,message,null,null);
     }
 }
