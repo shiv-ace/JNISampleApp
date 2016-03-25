@@ -7,28 +7,17 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.codeshiv.smsManager.MainActivity"
-    android:background="@drawable/backgr">
+    tools:context="com.codeshiv.smsManager.MainActivity">
 
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/enterNumber"
-        android:id="@+id/editTextNumber"
-        android:textColor="#FFFFFF"
-        android:inputType="text"/>
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/editTextNumber"
-        android:textColor="#FFFFFF"
-        android:text="@string/enterMessage"
-        android:id="@+id/editTextMessage"/>
+    <android.support.v4.view.ViewPager
+        android:layout_width="180dp"
+        android:layout_height="450dp"
+        android:id="@+id/viewPager" />
+
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/sendButton"
-        android:layout_below="@+id/editTextMessage"
-        android:id="@+id/sendButton"
-        android:background="#FFFFFF"/>
+        android:id="@+id/login"
+        android:text="Login"
+        android:layout_below="@+id/viewPager"/>
 </RelativeLayout>
