@@ -9,10 +9,11 @@ public class MainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        CreateNativeCall();
+        String s = CreateNativeCall();
+        System.out.println(s);
     }
 
-    public native void CreateNativeCall();
+    public native String CreateNativeCall();
 
     static {
         System.loadLibrary("nativeApplication");

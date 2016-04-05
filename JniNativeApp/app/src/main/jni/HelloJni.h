@@ -3,6 +3,6 @@
 
 #include <jni.h>
 
-JNIEXPORT void Java_com_codeshiv_jninativeapp_MainActivity_CreateNativeCall( JNIEnv* env, jobject obj );
+JNIEXPORT jstring Java_com_codeshiv_jninativeapp_MainActivity_CreateNativeCall( JNIEnv* env, jobject obj, jstring string);
 
 #endif //JNINATIVEAPP_HELLOJNI_H
